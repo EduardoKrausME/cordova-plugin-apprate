@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.7.0">
+    <name>AppRate</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <dependency id="cordova-plugin-dialogs" />
+    <dependency id="cordova-plugin-nativestorage" />
+
+    <js-module src="www/AppRate.js" name="AppRate">
+        <clobbers target="AppRate" />
+        <clobbers target="window.AppRate" />
+    </js-module>
+
+    <js-module src="www/locales.js" name="locales">
+        <runs target="AppRateLocales" />
+    </js-module>
+
+    <js-module src="www/storage.js" name="storage">
+        <runs target="AppRateStorage" />
+    </js-module>
+
+    <platform name="android">
+        <preference name="PLAY_CORE_VERSION" default="1.+" />
+        <framework src="com.google.android.play:core:$PLAY_CORE_VERSION" />
+        <source-file src="src/android/AppRate.java" target-dir="src/com/eduardokraus/apprate" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="android-package" value="com.eduardokraus.apprate.AppRate" />
+            </feature>
+        </config-file>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="ios-package" value="CDVAppRate" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVAppRate.h" />
+        <source-file src="src/ios/CDVAppRate.m" />
+
+        <framework src="StoreKit.framework" />
+    </platform>
+
+</plugin>
